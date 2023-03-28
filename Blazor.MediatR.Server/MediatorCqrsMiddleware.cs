@@ -28,7 +28,7 @@ public class MediatorCqrsMiddleware
                 leaveOpen: true);
             var body = await reader.ReadToEndAsync();
 
-            var messageContract = JsonSerializer.Deserialize<MessageContract>(body, new JsonSerializerOptions(JsonSerializerDefaults.Web))!;
+            var messageContract = JsonSerializer.Deserialize<MessageContract>(body, _blazorWrapperSetup.JsonSerializerOptions)!;
 
             var type = Type.GetType(messageContract.ObjectName)!;
             var r = JsonSerializer.Deserialize(messageContract.Json, type)!;
